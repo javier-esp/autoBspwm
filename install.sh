@@ -24,10 +24,10 @@ trap sig_int_handler INT
 
 install_dependencies() {
     echo -e "${green}[+] Installing bspwm and sxhkd depenencies... \n${end}"
-    sudo apt install build-essential git vim xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev
+    sudo apt install -y build-essential git vim xcb libxcb-util0-dev libxcb-ewmh-dev libxcb-randr0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-xinerama0-dev libasound2-dev libxcb-xtest0-dev libxcb-shape0-dev bspwm
 
     echo -e "${green}[+] Installing polybar and picom depenencies... \n${end}"    
-    sudo apt install libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev
+    sudo apt install -y libdbus-1-dev libegl-dev libev-dev libgl-dev libepoxy-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev meson ninja-build uthash-dev
 
     cd /tmp
     wget https://hyperrealm.github.io/libconfig/dist/libconfig-1.7.3.tar.gz
@@ -74,7 +74,7 @@ install_rofi() {
     echo -e "${green}\n[+] Installing rofi...\n${end}"
     cd ~/Descargas
     cp -r $dir/config/rofi/ ~/.config/
-    sudo apt install rofi
+    sudo apt install -y rofi
 }
 
 install_kitty() {
@@ -98,14 +98,15 @@ install_polybar() {
     cp -r $dir/config/scripts/ ~/.config/
     sudo cp ~/.config/polybar/fonts* /usr/share/fonts/truetype/
     fc-cache -v
-    sudo apt install polybar
+    sudo apt install -y polybar
 }
 
 install_zsh() {
     echo -e "${green}\n[+] Installing zsh and powerlevel10k...\n${end}"
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
-    sudo apt install zsh zsh-autocomplete zsh-autosuggestions zsh-syntax-highlighting
-	sudo usermod --shell /usr/bin/zsh root
+    sudo apt install -y zsh zsh-autocomplete zsh-autosuggestions zsh-syntax-highlighting
+
+    sudo usermod --shell /usr/bin/zsh root
     sudo usermod --shell /usr/bin/zsh $user
     cp $dir/.zshrc ~/
     cp $dir/.p10k.zsh ~/
@@ -117,7 +118,7 @@ install_zsh() {
 install_fzf() {
     echo -e "${green}\n[+] Installing fzf...\n${end}"
     cd ~/Descargas
-    sudo apt-get install expect
+    sudo apt-get install -y expect
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install << EOF
     y   
@@ -138,13 +139,13 @@ install_lsd() {
 
 set_fonts() {
     echo -e "${green}\n[+] Setting fonts...\n${end}"
-	sudo cp -r $dir/fonts /usr/local/share/
+    sudo cp -r $dir/fonts /usr/local/share/
     fc-cache -v
 }
 
 set_wallpaper() {
     echo -e "${green}\n[+] Setting wallpaper...\n${end}"
-    sudo apt install feh
+    sudo apt install -y feh
     cp -r $dir/config/wallpapers/ ~/.config/
 }
 
